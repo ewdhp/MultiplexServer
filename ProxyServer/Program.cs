@@ -27,7 +27,7 @@ namespace ProxyServer
           services.AddHostedService<WebSocketServer>();
         }).Build();
       await host.StartAsync();
-      Console.WriteLine("Poxy started.");
+      Console.WriteLine("Proxy started.");
       await host.WaitForShutdownAsync();
     }
   }

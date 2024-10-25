@@ -1,5 +1,7 @@
 using System.Net;
 using System.Net.WebSockets;
+using System.Numerics;
+using System.Reflection;
 using System.Text;
 using EdjCase.ICP.Agent;
 using EdjCase.ICP.Agent.Agents;
@@ -75,20 +77,21 @@ namespace ProxyServer
 
     private async Task HandleWebSocketConnection(
       WebSocket webSocket,
-        CancellationToken cancellationToken
-      )
+      CancellationToken cancellationToken)
     {
       var buffer = new byte[1024 * 4];
-      WebSocketReceiveResult result = await webSocket.ReceiveAsync(
-        new ArraySegment<byte>(buffer),
-        cancellationToken
+      WebSocketReceiveResult result = await
+        webSocket.ReceiveAsync(
+          new ArraySegment<byte>(buffer),
+          cancellationToken
         );
 
       while (!result.CloseStatus.HasValue)
       {
         var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
-        string canisterResponse = await CallCanisterWithIdentity(message);
-        var responseBuffer = Encoding.UTF8.GetBytes(canisterResponse);
+        var canisterResponse = await CallCanisterWithIdentity(message);
+        var responseBuffer = Encoding.UTF8.GetBytes(
+        canisterResponse?.ToString() ?? string.Empty);
         await webSocket.SendAsync(
           new ArraySegment<byte>(responseBuffer),
           WebSocketMessageType.Text, true,
@@ -109,45 +112,107 @@ namespace ProxyServer
         cancellationToken);
     }
 
-    private async Task<string> CallCanisterWithIdentity(string unityMsg)
+    private async Task<object> CallCanisterWithIdentity(string unityMsg)
     {
-      String cmd = unityMsg; // "wou canister cosmicrafts Signup "
-      _logger.LogInformation("Received command: {cmd}", cmd);
+      _logger.LogInformation("Received command: {cmd}", unityMsg);
+
+      // Split the command into parts
+      var parts = unityMsg.Split(' ');
+      if (parts.Length < 2)
+      {
+        _logger.LogError("Invalid command format. Use: className functionName arg1 arg2 ...");
+        return "Invalid command format";
+      }
+
+      string className = parts[0];
+      string functionName = parts[1];
+      var args = parts.Skip(2).ToArray();
+
       try
       {
-        _logger.LogInformation("Creating WebSocketBuilder...");
-        Principal id = Principal.FromText("bkyz2-fmaaa-aaaaa-qaaaq-cai"); ;
+        // Create the WebSocketBuilder
+        Principal id = Principal.FromText("bkyz2-fmaaa-aaaaa-qaaaq-cai");
         Uri uri = new Uri("wss://localhost:8080");
         var builder = new WebSocketBuilder<AppMessage>(id, uri);
         _logger.LogInformation("WebSocketBuilder created.");
 
-
-        _logger.LogInformation("Creating agent and keys...");
+        // Create agent and keys
         HttpAgent agent = new(httpBoundryNodeUrl: new Uri("http://localhost:4943"));
         SubjectPublicKeyInfo devRootKey = await agent.GetRootKeyAsync();
         builder = builder.WithRootKey(devRootKey);
         _logger.LogInformation("Root key set successfully.");
 
+        // Instantiate the appropriate class
+        object classInstance;
+        if (className == "Cosmicrafts")
+        {
+          classInstance = new CosmicraftsApiClient(agent, Principal.FromText("bkyz2-fmaaa-aaaaa-qaaaq-cai"));
+          _logger.LogInformation("CosmicraftsApiClient created.");
+        }
+        else
+        {
+          _logger.LogError($"Class '{className}' not supported.");
+          return $"Class '{className}' not found.";
+        }
 
-        _logger.LogInformation("Getting canister actor...");
-        var cosmicrafts = new CosmicraftsApiClient(agent,
-        Principal.FromText("bkyz2-fmaaa-aaaaa-qaaaq-cai"));
-        _logger.LogInformation("CosmicraftsApiClient created.");
+        // Reflectively find the method to call
+        Type classType = classInstance.GetType();
+        MethodInfo? method = classType.GetMethod(functionName);
+        if (method == null)
+        {
+          _logger.LogError($"Method '{functionName}' not found in class '{className}'.");
+          return $"Method '{functionName}' not found in class '{className}'.";
+        }
 
+        // Validate parameter count
+        ParameterInfo[] parameters = method.GetParameters();
+        if (parameters.Length != args.Length)
+        {
+          _logger.LogError($"Parameter count mismatch. Expected {parameters.Length}, but got {args.Length}.");
+          return $"Parameter count mismatch. Expected {parameters.Length}, but got {args.Length}.";
+        }
 
-        _logger.LogInformation("Calling canister function...");
-        var (isSuccess, response) = await cosmicrafts.Signup("user1", 1);
-        _logger.LogInformation("Canister response: {response}", response);
+        // Convert arguments
+        object[] convertedArgs = new object[args.Length];
+        for (int i = 0; i < args.Length; i++)
+        {
+          convertedArgs[i] = ConvertArgument(args[i], parameters[i].ParameterType);
+        }
 
-
-        return response;
+        // Invoke method asynchronously if it's a Task-returning method
+        var result = method.Invoke(classInstance, convertedArgs);
+        if (result is Task task)
+        {
+          await task; // Await the task
+                      // Check for Task<T> and get the result
+          if (task.GetType().IsGenericType)
+          {
+            var response = ((dynamic)task).Result;
+            return response?.ToString() ?? "No response";
+          }
+          return "Success"; // For void Task
+        }
       }
       catch (Exception ex)
       {
         _logger.LogError(ex, "Failed to call canister function");
-        throw;
+        return "An error occurred while calling the canister function.";
       }
+      return "CallCanisterWithIdentity failed";
     }
+
+    // Helper method to convert arguments based on their expected types
+    private object ConvertArgument(string arg, Type targetType)
+    {
+      if (targetType == typeof(UnboundedUInt))
+      {
+        // Convert string to UnboundedUInt (assuming it takes a string or BigInteger)
+        return UnboundedUInt.FromBigInteger(BigInteger.Parse(arg));
+      }
+      // Add other custom types here as necessary
+      return Convert.ChangeType(arg, targetType); // Fallback to default conversion
+    }
+
     private Ed25519Identity GenerateEd25519Identity()
     {
       byte[] seedBytes = Encoding.UTF8.GetBytes(testSeedPhrase);
