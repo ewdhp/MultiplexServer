@@ -191,3 +191,4 @@ System.Text.Json.JsonException: '0x00' is invalid after a single JSON value. Exp
 2024-10-29T17:53:37.1702874-06:00  [INF] HandleMessages Protocol: "WebSocket" (ecd9cbb8)
 2024-10-29T17:53:37.1703737-06:00  [INF] Dispatching request with Protocol: "WebSocket" (7f70e2c9)
 2024-10-29T20:36:18.9088175-06:00  [INF] Server started listening (09b1b6ac)
+2024-10-29T20:45:54.8779217-06:00  [INF] Server started listening (09b1b6ac)

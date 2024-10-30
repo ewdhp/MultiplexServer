@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Text.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace Server
 {
@@ -18,11 +19,12 @@ namespace Server
         private readonly HttpClient _httpClient = new HttpClient();
         private readonly UdpClient _udpClient = new UdpClient();
 
-        public WSProxy(ILogger<WSProxy> logger, string url)
+        public WSProxy(ILogger<WSProxy> logger, IConfiguration configuration)
         {
             _logger = logger;
             _listener = new HttpListener();
-            _listener.Prefixes.Add("http://localhost:5000/");
+            var port = configuration["WebSocketServer:Port"];
+            _listener.Prefixes.Add($"http://localhost:{port}/");
         }
 
         public async Task StartAsync()

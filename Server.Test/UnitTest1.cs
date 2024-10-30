@@ -30,12 +30,6 @@ namespace Server.Tests
             _serverTask = _wsProxy.StartAsync();
         }
 
-        [TestCleanup]
-        public void Cleanup()
-        {
-            _wsProxy.Stop();
-            _serverTask.Wait();
-        }
 
         [TestMethod]
         public async Task WebSocketServer_ShouldRespondToMultipleClientMessages()
