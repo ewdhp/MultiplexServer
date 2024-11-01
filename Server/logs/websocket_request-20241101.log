@@ -1,0 +1,139 @@
+2024-11-01T09:48:25.5245206-06:00  [INF] Deserializing JSON: "{" (f671f6dc)
+2024-11-01T09:48:25.6777844-06:00  [ERR] Error deserializing JSON: "{" (1842c5ca)
+System.Text.Json.JsonException: Expected depth to be zero at the end of the JSON payload. There is an open JSON object or array that should be closed. Path: $ | LineNumber: 0 | BytePositionInLine: 1.
+ ---> System.Text.Json.JsonReaderException: Expected depth to be zero at the end of the JSON payload. There is an open JSON object or array that should be closed. LineNumber: 0 | BytePositionInLine: 1.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Deserialize(Utf8JsonReader& reader, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at Server.Message.Deserialize(Byte[] data, Int32 count) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 348
+   at Server.WSProxy.HandleConnection(WebSocket websocket, String streamId) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 98
+2024-11-01T09:49:20.7394720-06:00  [INF] Deserializing JSON: "{            \"Timestamp\": \"2023-10-01T12:34:56Z\",            \"Protocol\": \"WebSocket\",            \"Success\": True,            \"RequestId\": \"12345\",            \"SessionId\": \"abcde\",            \"ErrorCode\": None,            \"ErrorMessage\": None,            \"EndPoint\": \"ws://localhost:8080\",            \"Data\": [                \"ws://localhost:5000\",                \"ws://localhost:5000\",                \"ws://localhost:5000\"            ]        }" (f671f6dc)
+2024-11-01T09:49:20.8503306-06:00  [ERR] Error deserializing JSON: "{            \"Timestamp\": \"2023-10-01T12:34:56Z\",            \"Protocol\": \"WebSocket\",            \"Success\": True,            \"RequestId\": \"12345\",            \"SessionId\": \"abcde\",            \"ErrorCode\": None,            \"ErrorMessage\": None,            \"EndPoint\": \"ws://localhost:8080\",            \"Data\": [                \"ws://localhost:5000\",                \"ws://localhost:5000\",                \"ws://localhost:5000\"            ]        }" (1842c5ca)
+System.Text.Json.JsonException: 'T' is an invalid start of a value. Path: $.Success | LineNumber: 0 | BytePositionInLine: 108.
+ ---> System.Text.Json.JsonReaderException: 'T' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 108.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Deserialize(Utf8JsonReader& reader, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at Server.Message.Deserialize(Byte[] data, Int32 count) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 348
+   at Server.WSProxy.HandleConnection(WebSocket websocket, String streamId) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 98
+2024-11-01T09:50:34.8058148-06:00  [INF] Deserializing JSON: "{            \"Timestamp\": \"2023-10-01T12:34:56Z\",            \"Protocol\": \"WebSocket\",            \"Success\": True,            \"RequestId\": \"12345\",            \"SessionId\": \"abcde\",            \"ErrorCode\": None,            \"ErrorMessage\": None,            \"EndPoint\": \"ws://localhost:8080\",            \"Data\": [                \"ws://localhost:5000\",                \"ws://localhost:5000\",                \"ws://localhost:5000\"            ]        }" (f671f6dc)
+2024-11-01T09:50:34.9131969-06:00  [ERR] Error deserializing JSON: "{            \"Timestamp\": \"2023-10-01T12:34:56Z\",            \"Protocol\": \"WebSocket\",            \"Success\": True,            \"RequestId\": \"12345\",            \"SessionId\": \"abcde\",            \"ErrorCode\": None,            \"ErrorMessage\": None,            \"EndPoint\": \"ws://localhost:8080\",            \"Data\": [                \"ws://localhost:5000\",                \"ws://localhost:5000\",                \"ws://localhost:5000\"            ]        }" (1842c5ca)
+System.Text.Json.JsonException: 'T' is an invalid start of a value. Path: $.Success | LineNumber: 0 | BytePositionInLine: 108.
+ ---> System.Text.Json.JsonReaderException: 'T' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 108.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Deserialize(Utf8JsonReader& reader, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at Server.Message.Deserialize(Byte[] data, Int32 count) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 348
+   at Server.WSProxy.HandleConnection(WebSocket websocket, String streamId) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 98
+2024-11-01T09:55:47.4466232-06:00  [INF] Deserializing JSON: "{            \"Timestamp\": \"2023-10-01T12:34:56Z\",            \"Protocol\": \"WebSocket\",            \"Success\": True,            \"RequestId\": \"12345\",            \"SessionId\": \"abcde\",            \"ErrorCode\": None,            \"ErrorMessage\": None,            \"EndPoint\": \"ws://localhost:8080\",            \"Data\": [                \"ws://localhost:5000\",                \"ws://localhost:5000\",                \"ws://localhost:5000\"            ]        }" (f671f6dc)
+2024-11-01T09:55:47.5481716-06:00  [ERR] Error deserializing JSON: "{            \"Timestamp\": \"2023-10-01T12:34:56Z\",            \"Protocol\": \"WebSocket\",            \"Success\": True,            \"RequestId\": \"12345\",            \"SessionId\": \"abcde\",            \"ErrorCode\": None,            \"ErrorMessage\": None,            \"EndPoint\": \"ws://localhost:8080\",            \"Data\": [                \"ws://localhost:5000\",                \"ws://localhost:5000\",                \"ws://localhost:5000\"            ]        }" (1842c5ca)
+System.Text.Json.JsonException: 'T' is an invalid start of a value. Path: $.Success | LineNumber: 0 | BytePositionInLine: 108.
+ ---> System.Text.Json.JsonReaderException: 'T' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 108.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Deserialize(Utf8JsonReader& reader, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at Server.Message.Deserialize(Byte[] data, Int32 count) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 349
+   at Server.WSProxy.HandleConnection(WebSocket websocket, String streamId) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 99
+2024-11-01T10:03:19.5257323-06:00  [INF] Deserializing JSON: "{  \"Timestamp\": \"2023-10-01T12:34:56Z\",  \"Protocol\": \"WebSocket\",  \"Success\": true,  \"RequestId\": \"12345\",  \"SessionId\": \"abcde\",  \"ErrorCode\": null,  \"ErrorMessage\": null,  \"EndPoint\": \"ws://localhost:8080\",  \"Data\": [    \"http://localhost:5000\",    \"http://localhost:5000\",    \"http://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:09:51.5524192-06:00  [INF] Deserializing JSON: "{  \"Timestamp\": \"2023-10-01T12:34:56Z\",  \"Protocol\": \"WebSocket\",  \"Success\": true,  \"RequestId\": \"12345\",  \"SessionId\": \"abcde\",  \"ErrorCode\": null,  \"ErrorMessage\": null,  \"EndPoint\": \"http://localhost:8080\",  \"Data\": [    \"http://localhost:5000\",    \"http://localhost:5000\",    \"http://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:10:46.5636611-06:00  [INF] Deserializing JSON: "{            \"Timestamp\": \"2023-10-01T12:34:56Z\",            \"Protocol\": \"WebSocket\",            \"Success\": True,            \"RequestId\": \"12345\",            \"SessionId\": \"abcde\",            \"ErrorCode\": None,            \"ErrorMessage\": None,            \"EndPoint\": \"ws://localhost:8080\",            \"Data\": [                \"ws://localhost:5000\",                \"ws://localhost:5000\",                \"ws://localhost:5000\"            ]        }" (f671f6dc)
+2024-11-01T10:10:46.5657632-06:00  [ERR] Error deserializing JSON: "{            \"Timestamp\": \"2023-10-01T12:34:56Z\",            \"Protocol\": \"WebSocket\",            \"Success\": True,            \"RequestId\": \"12345\",            \"SessionId\": \"abcde\",            \"ErrorCode\": None,            \"ErrorMessage\": None,            \"EndPoint\": \"ws://localhost:8080\",            \"Data\": [                \"ws://localhost:5000\",                \"ws://localhost:5000\",                \"ws://localhost:5000\"            ]        }" (1842c5ca)
+System.Text.Json.JsonException: 'T' is an invalid start of a value. Path: $.Success | LineNumber: 0 | BytePositionInLine: 108.
+ ---> System.Text.Json.JsonReaderException: 'T' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 108.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Deserialize(Utf8JsonReader& reader, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at Server.Message.Deserialize(Byte[] data, Int32 count) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 349
+   at Server.WSProxy.HandleConnection(WebSocket websocket, String streamId) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 99
+2024-11-01T10:13:27.5769172-06:00  [INF] Deserializing JSON: "{  \"Timestamp\": \"2023-10-01T12:34:56Z\",  \"Protocol\": \"WebSocket\",  \"Success\": true,  \"RequestId\": \"12345\",  \"SessionId\": \"abcde\",  \"ErrorCode\": null,  \"ErrorMessage\": null,  \"EndPoint\": \"ws://localhost:8080\",  \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:14:06.7991225-06:00  [INF] Deserializing JSON: " {            \"Timestamp\": \"2023-10-01T12:34:56Z\",            \"Protocol\": \"WebSocket\",            \"Success\": True,            \"RequestId\": \"12345\",            \"SessionId\": \"abcde\",            \"ErrorCode\": None,            \"ErrorMessage\": None,            \"EndPoint\": \"ws://localhost:8080\",            \"Data\": [                \"ws://localhost:5000\",                \"ws://localhost:5000\",                \"ws://localhost:5000\"            ]        }" (f671f6dc)
+2024-11-01T10:14:06.8009617-06:00  [ERR] Error deserializing JSON: " {            \"Timestamp\": \"2023-10-01T12:34:56Z\",            \"Protocol\": \"WebSocket\",            \"Success\": True,            \"RequestId\": \"12345\",            \"SessionId\": \"abcde\",            \"ErrorCode\": None,            \"ErrorMessage\": None,            \"EndPoint\": \"ws://localhost:8080\",            \"Data\": [                \"ws://localhost:5000\",                \"ws://localhost:5000\",                \"ws://localhost:5000\"            ]        }" (1842c5ca)
+System.Text.Json.JsonException: 'T' is an invalid start of a value. Path: $.Success | LineNumber: 0 | BytePositionInLine: 109.
+ ---> System.Text.Json.JsonReaderException: 'T' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 109.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Deserialize(Utf8JsonReader& reader, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at Server.Message.Deserialize(Byte[] data, Int32 count) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 349
+   at Server.WSProxy.HandleConnection(WebSocket websocket, String streamId) in /home/ee78dw587/CSharpServer/Server/WebSocketServer.cs:line 99
+2024-11-01T10:15:49.7241263-06:00  [INF] Deserializing JSON: "{  \"Timestamp\": \"2023-10-01T12:34:56Z\",  \"Protocol\": \"WebSocket\",  \"Success\": true,  \"RequestId\": \"12345\",  \"SessionId\": \"abcde\",  \"ErrorCode\": null,  \"ErrorMessage\": null,  \"EndPoint\": \"ws://localhost:8080\",  \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:15:57.0022941-06:00  [INF] Deserializing JSON: "{  \"Timestamp\": \"2023-10-01T12:34:56Z\",  \"Protocol\": \"WebSocket\",  \"Success\": true,  \"RequestId\": \"12345\",  \"SessionId\": \"abcde\",  \"ErrorCode\": null,  \"ErrorMessage\": null,  \"EndPoint\": \"ws://localhost:8080\",  \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:16:47.6711787-06:00  [INF] Deserializing JSON: "{  \"Timestamp\": \"2023-10-01T12:34:56Z\",  \"Protocol\": \"WebSocket\",  \"Success\": true,  \"RequestId\": \"12345\",  \"SessionId\": \"abcde\",  \"ErrorCode\": null,  \"ErrorMessage\": null,  \"EndPoint\": \"ws://localhost:8080\",  \"Data\": [    \"http://localhost:5000\",    \"http://localhost:5000\",    \"http://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:17:01.4549312-06:00  [INF] Deserializing JSON: "{  \"Timestamp\": \"2023-10-01T12:34:56Z\",  \"Protocol\": \"WebSocket\",  \"Success\": true,  \"RequestId\": \"12345\",  \"SessionId\": \"abcde\",  \"ErrorCode\": null,  \"ErrorMessage\": null,  \"EndPoint\": \"ws://localhost:8080\",  \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:17:25.4776225-06:00  [INF] Deserializing JSON: "{  \"Timestamp\": \"2023-10-01T12:34:56Z\",  \"Protocol\": \"WebSocket\",  \"Success\": true,  \"RequestId\": \"12345\",  \"SessionId\": \"abcde\",  \"ErrorCode\": null,  \"ErrorMessage\": null,  \"EndPoint\": \"ws://localhost:8080\",  \"Data\": [    \"http://localhost:5000\",    \"http://localhost:5000\",    \"http://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:19:26.5260970-06:00  [INF] Deserializing JSON: "{  \"Timestamp\": \"2023-10-01T12:34:56Z\",  \"Protocol\": \"WebSocket\",  \"Success\": true, \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:19:37.6447354-06:00  [INF] Deserializing JSON: "{  \"Timestamp\": \"2023-10-01T12:34:56Z\",  \"Protocol\": \"WebSocket\", \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:20:08.4859039-06:00  [INF] Deserializing JSON: "{\"Protocol\": \"WebSocket\", \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:20:30.9164810-06:00  [INF] Deserializing JSON: "{\"Protocol\": \"WebSocket\", \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5000\"  ]}" (f671f6dc)
+2024-11-01T10:22:16.0000622-06:00  [INF] Deserializing JSON: "{\"Protocol\": \"WebSocket\", \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5001\"  ]}" (f671f6dc)
+2024-11-01T10:28:18.9674019-06:00  [INF] Deserializing JSON: "{\"Protocol\": \"Http\", \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5001\"  ]}" (f671f6dc)
+2024-11-01T10:29:40.3987895-06:00  [INF] Deserializing JSON: "{\"Protocol\": \"HTTP\", \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5001\"  ]}" (f671f6dc)
+2024-11-01T10:30:48.9457858-06:00  [INF] Deserializing JSON: "{\"Protocol\": \"HTTP\", \"Data\": [    \"ws://localhost:5000\",    \"ws://localhost:5000\",    \"ws://localhost:5001\"  ]}" (f671f6dc)
+2024-11-01T10:31:17.8727338-06:00  [INF] Deserializing JSON (36997874)
+2024-11-01T10:32:11.3319582-06:00  [INF] Deserializing JSON (36997874)
+2024-11-01T10:51:42.0308291-06:00  [INF] Deserializing JSON (36997874)
+2024-11-01T10:52:50.6736809-06:00  [INF] Deserializing JSON (36997874)

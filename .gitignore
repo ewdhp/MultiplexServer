@@ -42,3 +42,6 @@ ScaffoldingReadMe.txt
 
 # Microsoft Visual Studio
 .vs/
+
+#Server Test Files
+Server.Test/
