@@ -45,3 +45,9 @@ ScaffoldingReadMe.txt
 
 #Server Test Files
 Server.Test/
+
+#logs
+logs/
+
+#myenv
+myenv
